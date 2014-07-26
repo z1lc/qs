@@ -20,6 +20,13 @@
     <script data-main="js/main.js" src="js/lib/require/require-2.1.14.min.js"></script>
 </head>
 <body>
+<div id="loading-overaly">
+    <div id="message">
+        <img src="img/ajax-loader-white.gif"><br><br>
+        &nbsp; &nbsp;Loading...
+    </div>
+</div>
+
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -28,14 +35,26 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">z1lc<sup>qs</sup></a>
+        <a class="navbar-brand active" href="#/home/">z1lc<sup>qs</sup></a>
     </div>
     <ul class="nav navbar-nav navbar-right">
-        <li><a>1m</a></li>
-        <li><a>3m</a></li>
-        <li><a>6m</a></li>
-        <li><a>1y</a></li>
-        <li><a>max</a></li>
+        <?php
+        // this is the first date I started data tracking. Ideally, this would be taken from the database,
+        // but the interaction seems like overkill here. Using magic number instead.
+        $TRACKING_START = "2013-11-01";
+        $DATE_FORMAT = "Y-m-d";
+        $dates = array(
+            "1m" => 30,
+            "3m" => 91,
+            "6m" => 183,
+            "1y" => 365);
+        $endDate = date($DATE_FORMAT);
+        foreach ($dates as $string => $days) {
+            $startDate = date($DATE_FORMAT, time() - ($days * 24 * 60 * 60));
+            echo "<li id={$startDate}><a href=\"#/dates/{$startDate}/{$endDate}\">{$string}</a></li>";
+        }
+        echo "<li id=\"$TRACKING_START\"><a href=\"#/dates/{$TRACKING_START}/{$endDate}\">max</a></li>";
+        ?>
     </ul>
 </div>
 <div class="container">
