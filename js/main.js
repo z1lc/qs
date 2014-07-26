@@ -37,6 +37,7 @@ require(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[cor
                     type: "GET"
                     //url: "http://www.robertsanek.com"
                 }).done(function () {
+
                 }).fail(function () {
                 }).always(function () {
                     self._dimScreen(false);
