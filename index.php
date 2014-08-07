@@ -37,25 +37,32 @@
         </button>
         <a class="navbar-brand active" href="#/home/">z1lc<sup>qs</sup></a>
     </div>
-    <ul class="nav navbar-nav navbar-right">
-        <?php
-        // this is the first date I started data tracking. Ideally, this would be taken from the database,
-        // but the interaction seems like overkill here. Using magic number instead.
-        $TRACKING_START = "2013-11-01";
-        $DATE_FORMAT = "Y-m-d";
-        $dates = array(
-            "1m" => 30,
-            "3m" => 91,
-            "6m" => 183,
-            "1y" => 365);
-        $endDate = date($DATE_FORMAT);
-        foreach ($dates as $string => $days) {
-            $startDate = date($DATE_FORMAT, time() - ($days * 24 * 60 * 60));
-            echo "<li id={$startDate}><a href=\"#/dates/{$startDate}/{$endDate}\">{$string}</a></li>";
-        }
-        echo "<li id=\"$TRACKING_START\"><a href=\"#/dates/{$TRACKING_START}/{$endDate}\">max</a></li>";
-        ?>
-    </ul>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li><a href="#">Add Data</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <?php
+            // this is the first date I started data tracking. Ideally, this would be taken from the database,
+            // but the interaction seems like overkill here. Using magic number instead.
+            $TRACKING_START = "2013-12-01";
+            $DATE_FORMAT = "Y-m-d";
+            //assuming a month is 30.44 days
+            $dates = array(
+                "1m" => 30,
+                "3m" => 91,
+                "6m" => 183,
+                "1y" => 365);
+            $endDate = date($DATE_FORMAT);
+            foreach ($dates as $string => $days) {
+                $startDate = date($DATE_FORMAT, time() - ($days * 24 * 60 * 60));
+                echo "<li id={$startDate}><a href=\"#/dates/{$startDate}/{$endDate}\">{$string}</a></li>";
+            }
+            echo "<li id=\"$TRACKING_START\"><a href=\"#/dates/{$TRACKING_START}/{$endDate}\">max</a></li>";
+            ?>
+        </ul>
+    </div>
+
 </div>
 <div class="container">
     <div id="top-left"></div>
