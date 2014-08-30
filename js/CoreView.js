@@ -11,7 +11,7 @@ define(['jquery', 'underscore', 'backbone', 'PieChartModel'], function($, _, Bac
                 dataURL: "../sqlDAO.php",
                 options: {
                     legend: {position: 'labeled'},
-                    chartArea: {left: 5, top: 0, width: '100%', height: '100%'},
+                    chartArea: {left: 5, top: 9, width: '100%', height: '100%'},
                     pieSliceText: 'none'
                 },
                 id: "top-left"
