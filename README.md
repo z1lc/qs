@@ -1,7 +1,7 @@
 z1lc/qs
 =======
 
-A quantified self dashboard with a focus on automation. http://www.z1lc.com
+A quantified-self dashboard with a focus on automated data gathering. http://www.z1lc.com
 
 ##Motivation
 I'm starting this project to shift some of my current life tracking/quantified self data online. This will result in 
@@ -24,7 +24,7 @@ but this is yet to be implemented.
 Other categories that are more difficult to store in a 'simple_value'-type table have their own tables. Sleep and 
 todo are fairly self-explanatory. For email, I am using the GMail API to get individual message IDs and log when I 
 received the message versus when it was archived. Code that accesses this will then have to make calculations for the
-response time. Work is a bit trickier, but not intesnsely so. I am integrating with Toggl in order to simplify my 
+response time. Work is a bit trickier, but not intensely so. I am integrating with Toggl in order to simplify my 
 time tracking. the 'work' table will contain start and end times for individual instances of tasks, 
 along with a work_category_id foreign key that refers to the work_category table. 
  
