@@ -15,7 +15,8 @@ if ($_GET["dimension"] && $_GET["from"] && $_GET["to"]) {
     if ($dimension = 69) {
         $result = mysqli_query($CRED_qs,
             "SELECT *
-            FROM work");
+            FROM work
+            WHERE date(start) >= date '$from'");
 
         $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
         $collated = array();

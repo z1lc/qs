@@ -17,10 +17,9 @@ require({
     }
 });
 
-define(['jquery', 'underscore', 'backbone', 'CoreRouter', 'CoreView'], function ($, _, Backbone, CoreRouter, CoreView) {
+define(['jquery', 'underscore', 'backbone', 'CoreRouter'], function ($, _, Backbone, CoreRouter) {
 
     var qs = {};
-    qs.view = new CoreView;
     qs.router = new CoreRouter;
     Backbone.history.start();
 });

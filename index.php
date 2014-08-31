@@ -49,6 +49,7 @@
             $DATE_FORMAT = "Y-m-d";
             //assuming a month is 30.44 days
             $dates = array(
+                "1w" => 7,
                 "1m" => 30,
                 "3m" => 91,
                 "6m" => 183,

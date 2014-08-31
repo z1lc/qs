@@ -1,8 +1,12 @@
-define(['jquery', 'underscore', 'backbone', 'CoreView'], function($, _, Backbone, CoreView) {
+define(['jquery', 'underscore', 'backbone', 'CoreView', 'DateUtils'], function($, _, Backbone, CoreView, DateUtils) {
     return Backbone.Router.extend({
         routes: {
             "dates/:from/:to": "navigateDate",
             "*actions": "defaultRoute"
+        },
+
+        initialize: function() {
+            this.view = new CoreView;
         },
 
         navigateDate: function (from, to) {
@@ -12,14 +16,12 @@ define(['jquery', 'underscore', 'backbone', 'CoreView'], function($, _, Backbone
             $("li").removeClass('active');
             $("#" + from).addClass('active');
             $("#3m").addClass("active");
-
-            var self = this;
-            console.log('Requested dates from ' + from + ' to ' + to);
-            
+            this.view.updateDates(from, to);
+            this._dimScreen(false);
         },
 
         defaultRoute: function () {
-            this.navigate('#/home/');
+            this.navigate('#/dates/' + DateUtils.getFormattedOneMonthAgo() + "/" + DateUtils.getFormattedToday());
         },
 
         _dimScreen: function (show) {
