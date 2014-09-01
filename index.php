@@ -13,6 +13,7 @@
     <title>z1lc QS</title>
     <meta name="description" content="A quantified self dashboard with a focus on automation. Written by Robert Sanek">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="img/faviconstats.png" />
 
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/main.css">

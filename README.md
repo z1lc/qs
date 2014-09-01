@@ -64,3 +64,6 @@ ssh rsanekne@rsanek.net
 cd public_html/z1lc/qs
 git pull
 ```
+
+##Credit
+Favicon [designed by Freepik.com](http://www.freepik.com).
