@@ -1,23 +1,25 @@
-define(['jquery', 'underscore', 'backbone', 'CoreView', 'DateUtils'], function($, _, Backbone, CoreView, DateUtils) {
+define(['jquery', 'underscore', 'backbone', 'CoreView', 'DateUtils'], function ($, _, Backbone, CoreView, DateUtils) {
     return Backbone.Router.extend({
         routes: {
             "dates/:from/:to": "navigateDate",
             "*actions": "defaultRoute"
         },
 
-        initialize: function() {
+        initialize: function () {
             this.view = new CoreView;
         },
 
         navigateDate: function (from, to) {
-            // Dim the screen, showing the loading indicator
-            this._dimScreen(true);
             // Set the correct li to active
             $("li").removeClass('active');
             $("#" + from).addClass('active');
             $("#3m").addClass("active");
-            this.view.updateDates(from, to);
-            this._dimScreen(false);
+            var self = this;
+            // Dim the screen, showing the loading indicator
+            $.when(this._dimScreen(true)).done(function () {
+                self.view.updateDates(from, to)
+            });
+            self._dimScreen(false);
         },
 
         defaultRoute: function () {
@@ -27,9 +29,9 @@ define(['jquery', 'underscore', 'backbone', 'CoreView', 'DateUtils'], function($
         _dimScreen: function (show) {
             var $overlay = $("#loading-overaly");
             if (show) {
-                $overlay.fadeIn(150);
+                return $overlay.fadeIn(150);
             } else {
-                $overlay.fadeOut(150);
+                return $overlay.fadeOut(150);
             }
         }
     });

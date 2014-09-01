@@ -37,3 +37,5 @@ foreach($toggl_response["data"] as $key) {
         mysqli_error($CRED_qs);
     }
 }
+
+echo "Toggl Data Updated Successfully.";
