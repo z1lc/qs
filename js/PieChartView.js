@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[corechart,gauge]'], function ($, _, Backbone, noconflict) {
+define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[corechart]'], function ($, _, Backbone, noconflict) {
     return Backbone.View.extend({
         tagName: "div",
 

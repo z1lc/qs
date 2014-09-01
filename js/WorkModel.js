@@ -3,10 +3,7 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[core
         defaults: function() {
             return {
                 categoryAndTimeArray: [],
-                averageTime: {
-                    hours: 0,
-                    minutes: 0
-                },
+                totalMinutes: 0,
                 from: DateUtils.getFormattedOneMonthAgo(),
                 to: DateUtils.getFormattedToday(),
                 subjectsFirst: false
@@ -29,7 +26,9 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[core
                 }
             }).done(function (msg) {
                 var arrayOfValues = JSON.parse(msg).table;
+                var totalMinutes = 0;
                 _.each(arrayOfValues, function(element) {
+                    totalMinutes += element[1] /60;
                     element[1] /= 60 * 60;
                     element[1] = Math.round(element[1] * 10) / 10;
                 });
@@ -44,6 +43,7 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[core
                     arrayOfValues = _.union(subjects, arrayOfValues);
                 }
 
+                self.set({totalMinutes: totalMinutes});
                 self.set({categoryAndTimeArray: arrayOfValues});
             });
         }

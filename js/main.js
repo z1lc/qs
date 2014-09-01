@@ -18,8 +18,9 @@ require({
 });
 
 define(['jquery', 'underscore', 'backbone', 'CoreRouter'], function ($, _, Backbone, CoreRouter) {
-
-    var qs = {};
-    qs.router = new CoreRouter;
-    Backbone.history.start();
+    $(function() {
+        var qs = {};
+        qs.router = new CoreRouter;
+        Backbone.history.start();
+    });
 });
