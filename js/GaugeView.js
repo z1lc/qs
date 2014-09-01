@@ -22,7 +22,7 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[gaug
         convertArrayToGoogleDataTable: function() {
             this.data = google.visualization.arrayToDataTable([
                 ['Label', 'Value'],
-                ['Work', Math.round(this.model.get("totalMinutes") / (60 * DateUtils.getDateDifferenceInDays(this.model.get("from"), this.model.get("to")))*10)/10]
+                ['Work', Math.round(this.model.get("totalMinutes") / (60 * DateUtils.getDateDifferenceInDaysBothInclusive(this.model.get("from"), this.model.get("to")))*10)/10]
             ]);
         }
     });
