@@ -2,27 +2,23 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[gaug
     return Backbone.View.extend({
         tagName: "div",
 
-        initialize: function(options) {
+        initialize: function (options) {
             this.options = options;
-            this.listenTo(this.model, 'change', this.render);
+            this.listenTo(this.model, 'change:totalMinutes', this.render);
             this.chart = new google.visualization.Gauge(document.getElementById(this.id));
             this.data = [];
         },
 
-        render: function(calledViaListenTo) {
-            if (_.isUndefined(calledViaListenTo) || this.model.hasChanged("from") || this.model.hasChanged("to")) {
-                var self = this;
-                $.when(this.model._fetchData()).then(function() {
-                    self.convertArrayToGoogleDataTable();
-                    self.chart.draw(self.data, self.options.googleChartOptions);
-                });
-            }
+        render: function () {
+            var self = this;
+            self.convertArrayToGoogleDataTable();
+            self.chart.draw(self.data, self.options.googleChartOptions);
         },
 
-        convertArrayToGoogleDataTable: function() {
+        convertArrayToGoogleDataTable: function () {
             this.data = google.visualization.arrayToDataTable([
                 ['Label', 'Value'],
-                ['Work', Math.round(this.model.get("totalMinutes") / (60 * DateUtils.getDateDifferenceInDaysBothInclusive(this.model.get("from"), this.model.get("to")))*10)/10]
+                ['Work', Math.round(this.model.get("totalMinutes") / (60 * DateUtils.getDateDifferenceInDaysBothInclusive(this.model.get("from"), this.model.get("to"))) * 10) / 10]
             ]);
         }
     });

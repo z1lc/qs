@@ -5,6 +5,8 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[core
                 categoryAndTimeArray: [],
                 totalOverTimeArray: [],
                 totalMinutes: 0,
+                //TODO: change into object so that we can listenTo changes on the object instead of on both from and on
+                //(we are firing 2 AJAX requests if a user changes both dates instead of the expected one).
                 from: DateUtils.getFormattedOneMonthAgo(),
                 to: DateUtils.getFormattedToday(),
                 subjectsFirst: false
@@ -12,6 +14,7 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[core
         },
 
         initialize: function () {
+            this.on("change:from change:to change:subjectsFirst", this._fetchData);
         },
 
         _fetchData: function () {
