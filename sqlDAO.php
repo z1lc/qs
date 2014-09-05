@@ -49,7 +49,6 @@ if ($_GET["dimension"] && $_GET["from"] && $_GET["to"] && $_GET["type"]) {
                     WHERE date(start) >= date '$from'
                     AND date(end) <= date '$to'");
 
-            $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
             $collated = array();
             foreach ($result as $key) {
                 $collated[$key['work_category']] = 0;
