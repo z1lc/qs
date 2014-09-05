@@ -43,6 +43,33 @@ if ($_GET["dimension"] && $_GET["from"] && $_GET["to"] && $_GET["type"]) {
         case "weight":
             break;
         case "work":
+            if($type == "overtime") {
+                $result = mysqli_query($CRED_qs,
+                    "SELECT date(start) dateOnly, sum(duration) durationTotal
+                    FROM work
+                    WHERE date(start) >= date '$from'
+                    AND date(end) <= date '$to'
+                    GROUP BY DateOnly");
+
+                //we may not have data on all dates within the requested date range. We need to create an array that
+                //already has all dates.
+                $currentDate = $from;
+                $outputArray = array();
+                while (strtotime($currentDate) <= strtotime($to)) {
+                    $outputArray[$currentDate] = 0;
+                    $currentDate = date ("Y-m-d", strtotime("+1 day", strtotime($currentDate)));
+                }
+
+                foreach ($result as $key) {
+                    $outputArray[$key['dateOnly']] += $key['durationTotal'];
+                }
+                $toPrint = "{\"table\": [";
+                foreach ($outputArray as $key => $value) {
+                    $toPrint .= "[\"" . $key . "\", " . $value . "],";
+                }
+                echo rtrim($toPrint, ",") . "]}";
+            }
+
             $result = mysqli_query($CRED_qs,
                 "SELECT *
                     FROM work

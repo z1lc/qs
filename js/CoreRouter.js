@@ -15,11 +15,7 @@ define(['jquery', 'underscore', 'backbone', 'CoreView', 'DateUtils'], function (
             $("#" + from).addClass('active');
             $("#3m").addClass("active");
             var self = this;
-            // Dim the screen, showing the loading indicator
-            $.when(this._dimScreen(true)).done(function () {
                 self.view.updateDates(from, to)
-            });
-            self._dimScreen(false);
         },
 
         defaultRoute: function () {

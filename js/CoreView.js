@@ -1,4 +1,4 @@
-define(['jquery', 'underscore', 'backbone', 'WorkModel', 'PieChartView', 'GaugeView'], function ($, _, Backbone, WorkModel, PieChartView, GaugeView) {
+define(['jquery', 'underscore', 'backbone', 'DateUtils', 'WorkModel', 'PieChartView', 'GaugeView', 'ComboChartView'], function ($, _, Backbone, DateUtils, WorkModel, PieChartView, GaugeView, ComboChartView) {
     return Backbone.View.extend({
         el: $("#mid-full"),
 
@@ -36,12 +36,23 @@ define(['jquery', 'underscore', 'backbone', 'WorkModel', 'PieChartView', 'GaugeV
                     majorTicks: ["0", "1", "2", "3", "4", "5", "6", "7"]
                 }
             });
+            var overallWorkComboChart = new ComboChartView({
+                model: overallWorkModel,
+                id: "top-right-TL",
+                googleChartOptions: {
+                    title: 'Daily Work Output, Hours',
+                    //chartArea: {width: '80%', height: '80%'},
+                    legend: {position: 'none'}, //who needs legends anyway?
+                    hAxis: {showTextEvery: 1},
+                    seriesType: "bars"
+                }
+            });
         },
 
         updateDates: function (from, to) {
             this.fromDate = from;
             this.toDate = to;
-            this.allModelArray.forEach(function(model) {
+            this.allModelArray.forEach(function (model) {
                 model.set({
                     from: from,
                     to: to
