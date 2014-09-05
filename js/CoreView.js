@@ -41,7 +41,8 @@ define(['jquery', 'underscore', 'backbone', 'DateUtils', 'WorkModel', 'PieChartV
                 id: "top-right-TL",
                 googleChartOptions: {
                     title: 'Daily Work Output, Hours',
-                    //chartArea: {width: '80%', height: '80%'},
+                    width: $(this.id).width, height: $(this.id).height,
+                    chartArea: {top: 20, left: 20, width: '100%', height: '80%'},
                     legend: {position: 'none'}, //who needs legends anyway?
                     hAxis: {showTextEvery: 1},
                     seriesType: "bars"
