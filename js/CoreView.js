@@ -31,7 +31,8 @@ define(['jquery', 'underscore', 'backbone', 'WorkModel', 'PieChartView', 'GaugeV
                 googleChartOptions: {
                     width: 200, height: 200, //we have to set w+h, otherwise redraw doesn't work properly
                     min: 0, max: 7,
-                    greenFrom: 6, greenTo: 7,
+                    yellowFrom: 5, yellowTo: 6, yellowColor: "#93d092", //repurposing 'yellow' to make another green
+                    greenFrom: 6, greenTo: 7, greenColor: "#39a237",
                     majorTicks: ["0", "1", "2", "3", "4", "5", "6", "7"]
                 }
             });
