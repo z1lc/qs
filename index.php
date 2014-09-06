@@ -40,7 +40,7 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-            <li><a href="#">Add Data</a></li>
+            <li><a href="https://github.com/z1lc/qs">About</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <?php
