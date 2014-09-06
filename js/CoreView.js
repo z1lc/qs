@@ -49,7 +49,7 @@ define(['jquery', 'underscore', 'backbone', 'DateUtils', 'WorkModel', 'PieChartV
                     legend: {position: 'none'}, //who needs legends anyway?
                     hAxis: {showTextEvery: 1},
                     seriesType: "bars",
-                    series: {1: {type: "line"}},
+                    series: {1: {type: "line"}, 2: {type: "line"}},
                     animation: {
                         duration: 500
                     }

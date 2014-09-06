@@ -67,18 +67,25 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[core
                     var arrayOfValues = JSON.parse(msg).table;
                     var initialAverageDays = Math.min(21, Math.ceil(arrayOfValues.length / 10));
                     //use the first x days for the initial exponential average
-                    var sum = 0;
-                    for (var i = 0; i < initialAverageDays; i++) {
-                        sum += arrayOfValues[i][1];
+                    var smallSum = 0;
+                    var totalSum = 0;
+                    for (var i = 0; i < arrayOfValues.length; i++) {
+                        if (i < initialAverageDays) {
+                            smallSum += arrayOfValues[i][1];
+                        }
+                        totalSum += arrayOfValues[i][1]
                     }
-                    var initialAverage = sum / initialAverageDays;
+                    var initialAverage = smallSum / initialAverageDays;
+                    var totalAverageHours = Math.round((totalSum / DateUtils.getDateDifferenceInDaysBothInclusive(self.get("from"), self.get("to")))/(60*60)*10)/10;
                     arrayOfValues[0][1] /= 60 * 60;
                     arrayOfValues[0][2] = initialAverage / (60 * 60);
+                    arrayOfValues[0][3] = totalAverageHours;
                     arrayOfValues[0][1] = Math.round(arrayOfValues[0][1] * 10) / 10;
 
                     for (var j = 1; j < arrayOfValues.length; j++) {
                         arrayOfValues[j][1] /= 60 * 60;
                         arrayOfValues[j][2] = arrayOfValues[j - 1][2] * 0.9 + arrayOfValues[j][1] * 0.1;
+                        arrayOfValues[j][3] = totalAverageHours;
                         arrayOfValues[j][1] = Math.round(arrayOfValues[j][1] * 10) / 10;
                     }
 
@@ -87,7 +94,7 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[core
                         e[2] = Math.round(e[2] * 10) / 10;
                     });
 
-                    arrayOfValues.unshift(['Date', 'Hours', 'Exponential Average']);
+                    arrayOfValues.unshift(['Date', 'Hours', 'Exponential Average', 'Total Average']);
                     self.set({totalOverTimeArray: arrayOfValues});
                 })
             );
