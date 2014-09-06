@@ -33,7 +33,10 @@ define(['jquery', 'underscore', 'backbone', 'DateUtils', 'WorkModel', 'PieChartV
                     min: 0, max: 7,
                     yellowFrom: 5, yellowTo: 6, yellowColor: "#93d092", //repurposing 'yellow' to make another green
                     greenFrom: 6, greenTo: 7, greenColor: "#39a237",
-                    majorTicks: ["0", "1", "2", "3", "4", "5", "6", "7"]
+                    majorTicks: ["0", "1", "2", "3", "4", "5", "6", "7"],
+                    animation: {
+                        duration: 500
+                    }
                 }
             });
             var overallWorkComboChart = new ComboChartView({
@@ -45,7 +48,11 @@ define(['jquery', 'underscore', 'backbone', 'DateUtils', 'WorkModel', 'PieChartV
                     chartArea: {top: 20, left: 20, width: '100%', height: '80%'},
                     legend: {position: 'none'}, //who needs legends anyway?
                     hAxis: {showTextEvery: 1},
-                    seriesType: "bars"
+                    seriesType: "bars",
+                    series: {1: {type: "line"}},
+                    animation: {
+                        duration: 500
+                    }
                 }
             });
         },

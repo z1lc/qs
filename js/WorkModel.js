@@ -6,7 +6,7 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[core
                 totalOverTimeArray: [],
                 totalMinutes: 0,
                 //TODO: change into object so that we can listenTo changes on the object instead of on both from and on
-                //(we are firing 2 AJAX requests if a user changes both dates instead of the expected one).
+                //(we are firing 2 AJAX requests if a user changes both dates instead of the expected 1).
                 from: DateUtils.getFormattedOneMonthAgo(),
                 to: DateUtils.getFormattedToday(),
                 subjectsFirst: false
@@ -63,12 +63,31 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[core
                         dimension: "work",
                         type: "overtime"
                     }
-                }).done(function(msg) {
+                }).done(function (msg) {
                     var arrayOfValues = JSON.parse(msg).table;
-                    _.each(arrayOfValues, function (element) {
-                        element[1] /= 60 * 60;
-                        element[1] = Math.round(element[1] * 10) / 10;
+                    var initialAverageDays = Math.min(21, Math.ceil(arrayOfValues.length / 10));
+                    //use the first x days for the initial exponential average
+                    var sum = 0;
+                    for (var i = 0; i < initialAverageDays; i++) {
+                        sum += arrayOfValues[i][1];
+                    }
+                    var initialAverage = sum / initialAverageDays;
+                    arrayOfValues[0][1] /= 60 * 60;
+                    arrayOfValues[0][2] = initialAverage / (60 * 60);
+                    arrayOfValues[0][1] = Math.round(arrayOfValues[0][1] * 10) / 10;
+
+                    for (var j = 1; j < arrayOfValues.length; j++) {
+                        arrayOfValues[j][1] /= 60 * 60;
+                        arrayOfValues[j][2] = arrayOfValues[j - 1][2] * 0.9 + arrayOfValues[j][1] * 0.1;
+                        arrayOfValues[j][1] = Math.round(arrayOfValues[j][1] * 10) / 10;
+                    }
+
+                    //we want to defer rounding of exponentiated average to as late as possible to reduce loss of precision
+                    _.each(arrayOfValues, function(e) {
+                        e[2] = Math.round(e[2] * 10) / 10;
                     });
+
+                    arrayOfValues.unshift(['Date', 'Hours', 'Exponential Average']);
                     self.set({totalOverTimeArray: arrayOfValues});
                 })
             );

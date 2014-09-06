@@ -19,7 +19,7 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[core
         },
 
         convertArrayToGoogleDataTable: function () {
-            this.data = google.visualization.arrayToDataTable(this.model.get("totalOverTimeArray"), true);
+            this.data = google.visualization.arrayToDataTable(this.model.get("totalOverTimeArray"));
         }
     });
 });
