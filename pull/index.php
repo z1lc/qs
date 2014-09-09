@@ -33,7 +33,7 @@ foreach($toggl_response["data"] as $key) {
     if (!mysqli_query($CRED_qs,
     "INSERT INTO work (toggl_id, work_category, start, end, duration)
     VALUES ('$toggl_id', '$work_category', '$start', '$end', '$duration')
-    ON DUPLICATE KEY UPDATE start='$start', end='$end', duration='$duration'")) {
+    ON DUPLICATE KEY UPDATE work_category='$work_category', start='$start', end='$end', duration='$duration'")) {
         mysqli_error($CRED_qs);
     }
 }
