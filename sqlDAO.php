@@ -49,6 +49,7 @@ if ($_GET["dimension"] && $_GET["from"] && $_GET["to"] && $_GET["type"]) {
                     FROM work
                     WHERE date(start) >= date '$from'
                     AND date(end) <= date '$to'
+                    AND work_category  <> 'Video & Games'
                     GROUP BY DateOnly");
 
                 //we may not have data on all dates within the requested date range. We need to create an array that
@@ -74,7 +75,8 @@ if ($_GET["dimension"] && $_GET["from"] && $_GET["to"] && $_GET["type"]) {
                 "SELECT *
                     FROM work
                     WHERE date(start) >= date '$from'
-                    AND date(end) <= date '$to'");
+                    AND date(end) <= date '$to'
+                    AND work_category  <> 'Video & Games'");
 
             $collated = array();
             foreach ($result as $key) {
