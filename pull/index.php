@@ -38,4 +38,6 @@ foreach($toggl_response["data"] as $key) {
     }
 }
 
-echo "Toggl Data Updated Successfully.";
+$body = '<html><head><link rel="shortcut icon" type="image/x-icon" href="img/faviconchevron.png" /></head><body>';
+$body .= 'Toggl Data Updated Successfully.</body></html>';
+echo $body;
