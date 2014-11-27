@@ -48,7 +48,7 @@ define(['jquery', 'underscore', 'backbone', 'DateUtils', 'WorkModel', 'PieChartV
                     chartArea: {top: 20, left: 20, width: '100%', height: '80%'},
                     legend: {position: 'none'}, //who needs legends anyway?
                     hAxis: {showTextEvery: 1},
-                    vAxis: {minValue: 0},
+                    vAxis: {minValue: 0, maxValue: 8},
                     seriesType: "bars",
                     series: {1: {type: "line"}, 2: {type: "line"}},
                     animation: {
