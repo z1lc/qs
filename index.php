@@ -21,7 +21,7 @@
     <script data-main="js/main.js" src="js/lib/require/require-2.1.14.min.js"></script>
 </head>
 <body>
-<div id="loading-overaly">
+<div id="loading-overlay">
     <div id="message">
         <img src="img/ajax-loader-white.gif"><br><br>
         &nbsp; &nbsp;Loading...
@@ -67,6 +67,11 @@
 
 </div>
 <div class="container">
+    <div id="temp-top-left"></div>
+    <div id="temp-right"></div>
+    <div id="temp-bot-left"></div>
+
+    <!--
     <div id="top-left"></div>
     <div id="top-right-container">
         <div id="top-right-TL"></div>
@@ -84,6 +89,7 @@
 
     <div class="clear"></div>
     <div id="bot-full"></div>
+    -->
 </div>
 </body>
 </html>

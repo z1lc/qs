@@ -37,7 +37,7 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[core
                     _.each(arrayOfValues, function (element) {
                         totalMinutes += element[1] / 60;
                         element[1] /= 60 * 60;
-                        element[1] = Math.round(element[1] * 10) / 10;
+                        element[1] = Math.round(element[1] * 100) / 100;
                     });
 
                     //Sometimes, we'd like for tasks that are subjects in school to go first. We can detect this programmatically
@@ -80,18 +80,18 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[core
                     arrayOfValues[0][1] /= 60 * 60;
                     arrayOfValues[0][2] = initialAverage / (60 * 60);
                     arrayOfValues[0][3] = totalAverageHours;
-                    arrayOfValues[0][1] = Math.round(arrayOfValues[0][1] * 10) / 10;
+                    arrayOfValues[0][1] = Math.round(arrayOfValues[0][1] * 100) / 100;
 
                     for (var j = 1; j < arrayOfValues.length; j++) {
                         arrayOfValues[j][1] /= 60 * 60;
                         arrayOfValues[j][2] = arrayOfValues[j - 1][2] * 0.9 + arrayOfValues[j][1] * 0.1;
                         arrayOfValues[j][3] = totalAverageHours;
-                        arrayOfValues[j][1] = Math.round(arrayOfValues[j][1] * 10) / 10;
+                        arrayOfValues[j][1] = Math.round(arrayOfValues[j][1] * 100) / 100;
                     }
 
                     //we want to defer rounding of exponentiated average to as late as possible to reduce loss of precision
                     _.each(arrayOfValues, function(e) {
-                        e[2] = Math.round(e[2] * 10) / 10;
+                        e[2] = Math.round(e[2] * 100) / 100;
                     });
 
                     arrayOfValues.unshift(['Date', 'Hours', 'Exponential Average', 'Total Average']);

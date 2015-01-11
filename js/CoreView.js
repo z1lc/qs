@@ -18,7 +18,7 @@ define(['jquery', 'underscore', 'backbone', 'DateUtils', 'WorkModel', 'PieChartV
             this.allModelArray.push(overallWorkModel);
             var overallWorkPieChart = new PieChartView({
                 model: overallWorkModel,
-                id: "top-left",
+                id: "temp-top-left",
                 googleChartOptions: {
                     legend: {position: 'labeled'},
                     chartArea: {left: 5, top: 9, width: '100%', height: '100%'},
@@ -27,13 +27,13 @@ define(['jquery', 'underscore', 'backbone', 'DateUtils', 'WorkModel', 'PieChartV
             });
             var overallWorkGauge = new GaugeView({
                 model: overallWorkModel,
-                id: "mid-full",
+                id: "temp-bot-left",
                 googleChartOptions: {
                     width: 200, height: 200, //we have to set w+h, otherwise redraw doesn't work properly
-                    min: 0, max: 7,
-                    yellowFrom: 5, yellowTo: 6, yellowColor: "#93d092", //repurposing 'yellow' to make another green
-                    greenFrom: 6, greenTo: 7, greenColor: "#39a237",
-                    majorTicks: ["0", "1", "2", "3", "4", "5", "6", "7"],
+                    min: 0, max: 9,
+                    yellowFrom: 6, yellowTo: 7, yellowColor: "#93d092", //repurposing 'yellow' to make another green
+                    greenFrom: 7, greenTo: 9, greenColor: "#39a237",
+                    majorTicks: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
                     animation: {
                         duration: 500
                     }
@@ -41,14 +41,14 @@ define(['jquery', 'underscore', 'backbone', 'DateUtils', 'WorkModel', 'PieChartV
             });
             var overallWorkComboChart = new ComboChartView({
                 model: overallWorkModel,
-                id: "top-right-TL",
+                id: "temp-right",
                 googleChartOptions: {
                     title: 'Daily Work Output, Hours',
                     width: $(this.id).width, height: $(this.id).height,
-                    chartArea: {top: 20, left: 20, width: '100%', height: '80%'},
+                    chartArea: {top: 25, left: 40, width: '100%', height: '95%'},
                     legend: {position: 'none'}, //who needs legends anyway?
                     hAxis: {showTextEvery: 1},
-                    vAxis: {minValue: 0, maxValue: 8},
+                    vAxis: {minValue: 0, gridlines: {count: 10}},
                     seriesType: "bars",
                     series: {1: {type: "line"}, 2: {type: "line"}},
                     animation: {
