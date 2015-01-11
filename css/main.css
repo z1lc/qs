@@ -88,10 +88,15 @@
     width: 40%;
     height: 45%;
     float: left;
+    text-align: center;
 }
 
 #temp-right {
     width: 60%;
     height: 100%;
     float: right;
+}
+
+#temp-bot-left-1, #temp-bot-left-2 {
+    display: inline-block;
 }

@@ -67,9 +67,15 @@
 
 </div>
 <div class="container">
-    <div id="temp-top-left"></div>
+    <div id="temp-top-left">
+    </div>
     <div id="temp-right"></div>
-    <div id="temp-bot-left"></div>
+    <div id="temp-bot-left">
+        <div id="temp-bot-left-1">
+        </div>
+        <div id="temp-bot-left-2">
+        </div>
+    </div>
 
     <!--
     <div id="top-left"></div>

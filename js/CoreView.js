@@ -27,13 +27,31 @@ define(['jquery', 'underscore', 'backbone', 'DateUtils', 'WorkModel', 'PieChartV
             });
             var overallWorkGauge = new GaugeView({
                 model: overallWorkModel,
-                id: "temp-bot-left",
+                identifier: "averageHours",
+                id: "temp-bot-left-1",
+                totalGauges: 2,
                 googleChartOptions: {
-                    width: 200, height: 200, //we have to set w+h, otherwise redraw doesn't work properly
-                    min: 0, max: 9,
+                    width: 300, height: 300, //we have to set w+h, otherwise redraw doesn't work properly
+                    min: 0, max: 10,
                     yellowFrom: 6, yellowTo: 7, yellowColor: "#93d092", //repurposing 'yellow' to make another green
-                    greenFrom: 7, greenTo: 9, greenColor: "#39a237",
-                    majorTicks: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+                    greenFrom: 7, greenTo: 10, greenColor: "#39a237",
+                    majorTicks: ["0", "2", "4", "6", "8", "10"],
+                    animation: {
+                        duration: 500
+                    }
+                }
+            });
+            var overallWorkExcess = new GaugeView({
+                model: overallWorkModel,
+                identifier: "netExcess",
+                id: "temp-bot-left-2",
+                totalGauges: 2,
+                googleChartOptions: {
+                    width: 300, height: 300, //we have to set w+h, otherwise redraw doesn't work properly
+                    min: -15, max: 15,
+                    yellowFrom: -2.5, yellowTo: 15, yellowColor: "#39a237", //for some reason, 'yellow' is painted over green. Flipping colors then.
+                    greenFrom: -5, greenTo: 5, greenColor: "#93d092",
+                    majorTicks: ["-15", "-10", "-5", "0", "5", "10", "15"],
                     animation: {
                         duration: 500
                     }
