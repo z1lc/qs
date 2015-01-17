@@ -106,7 +106,7 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[core
                             arrayOfValues[j][3] = arrayOfValues[j - 1][3] * 0.9 + arrayOfValues[j][1] * 0.1;
                         }
                         arrayOfValues[j][4] = totalAverageHours;
-                        arrayOfValues[j][2] = "color: " + self._colorLuminance("#3366cc", Math.min(0.9,((arrayOfValues[j][1] - totalAverageHours) / totalAverageHours)/2)) + ";";
+                        arrayOfValues[j][2] = "fill-color: " + self._colorLuminance("#3366cc", Math.min(0.9,((arrayOfValues[j][1] - totalAverageHours) / totalAverageHours)/2)) + ";";
                         arrayOfValues[j][1] = Math.round(arrayOfValues[j][1] * 100) / 100;
                     }
 
