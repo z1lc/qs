@@ -17,6 +17,26 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[core
             this.on("change:from change:to change:subjectsFirst", this._fetchData);
         },
 
+        //via http://goo.gl/8Pj3bf
+        _colorLuminance: function(hex, lum) {
+            // validate hex string
+            hex = String(hex).replace(/[^0-9a-f]/gi, '');
+            if (hex.length < 6) {
+                hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+            }
+            lum = lum || 0;
+
+            // convert to decimal and change luminosity
+            var rgb = "#", c, i;
+            for (i = 0; i < 3; i++) {
+                c = parseInt(hex.substr(i*2,2), 16);
+                c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
+                rgb += ("00"+c).substr(c.length);
+            }
+
+            return rgb;
+        },
+
         _fetchData: function () {
             var self = this;
             //we need to do multiple AJAX calls on this model to fetch all associated data. Wrap individual $.ajax promises
@@ -65,36 +85,43 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[core
                     }
                 }).done(function (msg) {
                     var arrayOfValues = JSON.parse(msg).table;
+                    //use the first 21 or 10% of days (whichever smaller) for the initial exponential average
                     var initialAverageDays = Math.min(21, Math.ceil(arrayOfValues.length / 10));
-                    //use the first x days for the initial exponential average
-                    var smallSum = 0;
+                    var initialSum = 0;
                     var totalSum = 0;
                     for (var i = 0; i < arrayOfValues.length; i++) {
                         if (i < initialAverageDays) {
-                            smallSum += arrayOfValues[i][1];
+                            initialSum += arrayOfValues[i][1];
                         }
                         totalSum += arrayOfValues[i][1]
                     }
-                    var initialAverage = smallSum / initialAverageDays;
+                    var initialAverage = initialSum / initialAverageDays;
                     var totalAverageHours = Math.round((totalSum / DateUtils.getDateDifferenceInDaysBothInclusive(self.get("from"), self.get("to")))/(60*60)*10)/10;
-                    arrayOfValues[0][1] /= 60 * 60;
-                    arrayOfValues[0][2] = initialAverage / (60 * 60);
-                    arrayOfValues[0][3] = totalAverageHours;
-                    arrayOfValues[0][1] = Math.round(arrayOfValues[0][1] * 100) / 100;
 
-                    for (var j = 1; j < arrayOfValues.length; j++) {
+                    for (var j = 0; j < arrayOfValues.length; j++) {
                         arrayOfValues[j][1] /= 60 * 60;
-                        arrayOfValues[j][2] = arrayOfValues[j - 1][2] * 0.9 + arrayOfValues[j][1] * 0.1;
-                        arrayOfValues[j][3] = totalAverageHours;
+                        if (j == 0) { //first element needs special treatment because it has the custom exponentiated average
+                            arrayOfValues[j][3] = initialAverage / (60 * 60);
+                        } else {
+                            arrayOfValues[j][3] = arrayOfValues[j - 1][3] * 0.9 + arrayOfValues[j][1] * 0.1;
+                        }
+                        arrayOfValues[j][4] = totalAverageHours;
+                        arrayOfValues[j][2] = "color: " + self._colorLuminance("#2750a1", Math.min(0.9,((arrayOfValues[j][1] - totalAverageHours) / totalAverageHours)/2)) + ";";
                         arrayOfValues[j][1] = Math.round(arrayOfValues[j][1] * 100) / 100;
                     }
 
                     //we want to defer rounding of exponentiated average to as late as possible to reduce loss of precision
                     _.each(arrayOfValues, function(e) {
-                        e[2] = Math.round(e[2] * 100) / 100;
+                        e[3] = Math.round(e[3] * 100) / 100;
                     });
 
-                    arrayOfValues.unshift(['Date', 'Hours', 'Exponential Average', 'Total Average']);
+                    arrayOfValues.unshift([
+                        {label: 'Date', type: 'string'},
+                        {label: 'Hours', type: 'number'},
+                        {type: 'string', role: 'style'},
+                        {label: 'Exponential Average', type: 'number'},
+                        {label: 'Total Average', type: 'number'}
+                    ]);
                     self.set({totalOverTimeArray: arrayOfValues});
                 })
             );
