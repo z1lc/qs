@@ -78,7 +78,12 @@ define(['jquery', 'underscore', 'backbone', 'DateUtils', 'WorkModel', 'PieChartV
 
         updateDates: function (from, to) {
             this.fromDate = from;
-            this.toDate = to;
+            if (to == "today") {
+                this.toDate = DateUtils.getFormattedToday();
+                to = DateUtils.getFormattedToday();
+            } else {
+                this.toDate = to;
+            }
             this.allModelArray.forEach(function (model) {
                 model.set({
                     from: from,

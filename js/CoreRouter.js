@@ -15,11 +15,11 @@ define(['jquery', 'underscore', 'backbone', 'CoreView', 'DateUtils'], function (
             $("#" + from).addClass('active');
             $("#3m").addClass("active");
             var self = this;
-                self.view.updateDates(from, to)
+            self.view.updateDates(from, to);
         },
 
         defaultRoute: function () {
-            this.navigate('#/dates/' + DateUtils.getFormattedOneMonthAgo() + "/" + DateUtils.getFormattedToday());
+            this.navigate('#/dates/' + DateUtils.getFormattedOneMonthAgo() + "/today");
         },
 
         _dimScreen: function (show) {

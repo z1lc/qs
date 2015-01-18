@@ -58,9 +58,9 @@
             $endDate = date($DATE_FORMAT);
             foreach ($dates as $string => $days) {
                 $startDate = date($DATE_FORMAT, time() - ($days * 24 * 60 * 60));
-                echo "<li id={$startDate}><a href=\"#/dates/{$startDate}/{$endDate}\">{$string}</a></li>";
+                echo "<li id={$startDate}><a href=\"#/dates/{$startDate}/today\">{$string}</a></li>";
             }
-            echo "<li id=\"$TRACKING_START\"><a href=\"#/dates/{$TRACKING_START}/{$endDate}\">max</a></li>";
+            echo "<li id=\"$TRACKING_START\"><a href=\"#/dates/{$TRACKING_START}/today\">max</a></li>";
             ?>
         </ul>
     </div>
