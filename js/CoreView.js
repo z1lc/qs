@@ -69,7 +69,7 @@ define(['jquery', 'underscore', 'backbone', 'DateUtils', 'WorkModel', 'PieChartV
                     hAxis: {showTextEvery: 1},
                     vAxis: {minValue: 0, ticks: [2,4,6,8,10,12], minorGridlines: {count: 1}},
                     seriesType: "bars",
-                    series: {1: {type: "line"}, 2: {type: "line"}},
+                    series: {1: {type: "line", curveType: "function"}, 2: {type: "line"}},
                     animation: {
                         duration: 1000,
                         easing: "inAndOut"
