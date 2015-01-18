@@ -57,6 +57,7 @@ define(['jquery', 'underscore', 'backbone', 'DateUtils', 'WorkModel', 'PieChartV
                     }
                 }
             });
+
             var overallWorkComboChart = new ComboChartView({
                 model: overallWorkModel,
                 id: "temp-right",
@@ -70,8 +71,10 @@ define(['jquery', 'underscore', 'backbone', 'DateUtils', 'WorkModel', 'PieChartV
                     seriesType: "bars",
                     series: {1: {type: "line"}, 2: {type: "line"}},
                     animation: {
-                        duration: 500
-                    }
+                        duration: 1000,
+                        easing: "inAndOut"
+                    },
+                    bar: {groupWidth: '61.8%'} //changed in ComboChartView.js anyway
                 }
             });
         },
