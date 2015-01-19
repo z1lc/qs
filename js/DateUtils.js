@@ -1,14 +1,14 @@
 define(['jquery', 'underscore'], function ($, _) {
-    var today = new Date();
+    var today = new Date((new Date).toLocaleString() + " UTC"); //stupid timezone issues... http://stackoverflow.com/q/6525538
     return {
         getFormattedToday: function () {
-            return today.toISOString().substring(0, 10);
+            return today.toISOString().substring(0,10);
         },
 
         getFormattedOneMonthAgo: function () {
             var oneMonthAgo = new Date(today);
             oneMonthAgo.setDate(today.getDate() - 30);
-            return oneMonthAgo.toISOString().substring(0, 10);
+            return oneMonthAgo.toISOString().substring(0,10);
         },
 
         getDateDifferenceInDaysBothInclusive: function(date1, date2) {
