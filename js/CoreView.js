@@ -48,10 +48,10 @@ define(['jquery', 'underscore', 'backbone', 'DateUtils', 'WorkModel', 'PieChartV
                 totalGauges: 2,
                 googleChartOptions: {
                     width: 300, height: 300, //we have to set w+h, otherwise redraw doesn't work properly
-                    min: -15, max: 15,
-                    yellowFrom: -2.5, yellowTo: 15, yellowColor: "#39a237", //for some reason, 'yellow' is painted over green. Flipping colors then.
-                    greenFrom: -5, greenTo: 5, greenColor: "#93d092",
-                    majorTicks: ["-15", "-10", "-5", "0", "5", "10", "15"],
+                    min: 6, max: 10,
+                    yellowFrom: 6, yellowTo: 8, yellowColor: "#39a237", //for some reason, 'yellow' is painted over green. Flipping colors then.
+                    greenFrom: 8, greenTo: 8.5, greenColor: "#93d092",
+                    majorTicks: ["6", "7", "8", "9", "10"],
                     animation: {
                         duration: 500
                     }

@@ -31,9 +31,10 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[gaug
                     ['Work', Math.round(this.model.get("totalMinutes") / (60 * DateUtils.getDateDifferenceInDaysBothInclusive(this.model.get("from"), this.model.get("to"))) * 100) / 100]
                 ]);
             } else if (this.options.identifier == "netExcess") {
+                var eightHours = (8 * this.model.get("totalMinutes"))/(60 * DateUtils.getDateDifferenceInDaysBothInclusive(this.model.get("to"), "2015-05-08"));
                 this.data = google.visualization.arrayToDataTable([
                     ['Label', 'Value'],
-                    ['Excess', Math.round(((this.model.get("totalMinutes") - 7*60* DateUtils.getDateDifferenceInDaysBothInclusive(this.model.get("from"), this.model.get("to")))) / (60 ) * 10) / 10]
+                    ['8 Hours', Math.round((eightHours) * 100) / 100]
                 ]);
             }
         }
