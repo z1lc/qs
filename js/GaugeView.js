@@ -32,13 +32,13 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[gaug
                 ]);
             } else if (this.options.identifier == "netExcess") {
                 //This will calculate the average # of hours necessary to work per day to achieve "goal" number of hours.
-                var goal = 8;
+                var goal = 7;
                 var remainingDays = DateUtils.getDateDifferenceInDaysBothInclusive(this.model.get("to"), "2015-05-08");
                 var totalDays = DateUtils.getDateDifferenceInDaysBothInclusive("2015-01-04", "2015-05-08");
                 var eightHours = (goal * totalDays - (this.model.get("totalMinutes")/60)) / remainingDays;
                 this.data = google.visualization.arrayToDataTable([
                     ['Label', 'Value'],
-                    ['8 Hours', Math.round((eightHours) * 100) / 100]
+                    ['7 Hours', Math.round((eightHours) * 100) / 100]
                 ]);
             }
         }
