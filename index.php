@@ -50,12 +50,12 @@
             $DATE_FORMAT = "Y-m-d";
             //assuming a month is 30.44 days
             $dates = array(
-                "1d" => 1,
-                "1w" => 7,
-                "1m" => 30,
-                "3m" => 91,
-                "6m" => 183,
-                "1y" => 365);
+                "1d" => 0,
+                "1w" => 6,
+                "1m" => 29,
+                "3m" => 90,
+                "6m" => 182,
+                "1y" => 364);
             $endDate = date($DATE_FORMAT);
             foreach ($dates as $string => $days) {
                 $startDate = date($DATE_FORMAT, time() - ($days * 24 * 60 * 60));
