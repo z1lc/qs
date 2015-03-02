@@ -12,10 +12,12 @@ define(['jquery', 'underscore', 'backbone', 'goog!visualization,1,packages:[gaug
 
         autoResize: function() {
             var $id = $("#temp-bot-left");
-            var maxWidth = $id.width() / this.options.totalGauges;
-            var maxHeight = $id.height();
-            this.options.googleChartOptions.width = Math.min(maxWidth, maxHeight);
-            this.options.googleChartOptions.height = Math.min(maxWidth, maxHeight);
+            var maxWidth = $id.innerWidth() / this.options.totalGauges;
+            var maxHeight = $id.innerHeight();
+            //not sure as to why this 2 correction needs to be here, it was working fine before and then started acting up in late Feb.
+            var minimum = Math.min(maxWidth, maxHeight) - 2;
+            this.options.googleChartOptions.width = minimum;
+            this.options.googleChartOptions.height = minimum;
         },
 
         render: function () {

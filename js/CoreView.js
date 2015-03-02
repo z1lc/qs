@@ -41,7 +41,7 @@ define(['jquery', 'underscore', 'backbone', 'DateUtils', 'WorkModel', 'PieChartV
                     }
                 }
             });
-            var overallWorkExcess = new GaugeView({
+            var overallWorkExcessGauge = new GaugeView({
                 model: overallWorkModel,
                 identifier: "netExcess",
                 id: "temp-bot-left-2",
