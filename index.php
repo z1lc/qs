@@ -44,9 +44,20 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <?php
-            // this is the first date I started data tracking. Ideally, this would be taken from the database,
-            // but the interaction seems like overkill here. Using magic number instead.
-            $TRACKING_START = "2013-12-01";
+            include 'credentials.php';
+
+            if ($CRED_mysqlConnectionFailed) {
+                echo "MySQL connection failed; cannot proceed.";
+                exit(0);
+            }
+
+            $result = mysqli_query($CRED_qs,
+                "SELECT min(date(start)) firstDate
+                    FROM work");
+
+            //this 'tracking start' will only be valid if the earliest data is within the
+            //work table. If not, I will need to update this code.
+            $TRACKING_START = $result->fetch_array()[0];
             $DATE_FORMAT = "Y-m-d";
             //assuming a month is 30.44 days
             $dates = array(
