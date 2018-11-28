@@ -3,16 +3,16 @@ z1lc/qs
 
 A quantified-self dashboard with a focus on automated data gathering. http://www.z1lc.com
 
-##Motivation
+## Motivation
 I'm starting this project to shift some of my current life tracking/quantified self data online. This will result in 
 less reliance on proprietary software (MS Excel), higher availability (Internet vs. local file), 
 and hopefully a fruitful learning experience in JavaScript and php.
 
-##Architecture Overview
+## Architecture Overview
 What follows is a brief summary of the server-side and client-side architecture for storing data. This is mainly here
  for my own reference.
 
-###Database Schema & Storage
+### Database Schema & Storage
 All categories of tracking are stored in the 'dimensions' table. This table gives each category name an ID and 
 specifies in which table its data is stored. For most categories, this will be the 'simple_value' table. In 
 'simple_value', all we store is the value we want to track, the id of the dimension that it belongs to, 
@@ -28,15 +28,15 @@ response time. Work is a bit trickier, but not intensely so. I am integrating wi
 time tracking. the 'work' table will contain start and end times for individual instances of tasks, 
 along with a work_category_id foreign key that refers to the work_category table. 
  
-###Client-Side Models
+### Client-Side Models
 I am using [Backbone.js](http://backbonejs.org/) as my MVC framework of choice, 
 and generally aim to mimic the database when representing data in Models. Consequently, 
 all data that resides in the 'simple_values' table also uses the same model, a 'SimpleValueModel'. This model 
 includes properties like dimension name, id, and the actual data that is within the database. Since I don't really 
 have that much data
 
-##FAQs
-###Why Use Google Charts?
+## FAQs
+### Why Use Google Charts?
 For an app whose main front-facing interface consists of a smattering of graphs, it makes sense to give some serious 
 thought to which JavaScript framework will provide the graphs. I had three main concerns when choosing a framework:
  * FOSS, or at least not proprietary
@@ -58,12 +58,12 @@ area, etc. -- wasn't as good as with Google Charts. I feel that D3's focus is mo
 and I don't forsee myself needing it to the level that they provide. The process of elimination made the decision 
 fairly easy, leaving me to use the Google Charts API.
 
-##Deployment process
+## Deployment process
 ```
 ssh rsanekne@rsanek.net
 cd public_html/z1lc/qs
 git pull
 ```
 
-##Credit
+## Credit
 Favicon [designed by Freepik.com](http://www.freepik.com).
